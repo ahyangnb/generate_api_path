@@ -50,11 +50,6 @@ class GenerateApiPath {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
 
-    const firstImportLine = """
-import 'package:flutter/foundation.dart';
-""";
-
-    buffer.writeln(firstImportLine);
     buffer.writeln("");
     buffer.writeln("""
 // **************************************************************************
