@@ -1,7 +1,7 @@
 name: generate_api_path
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/ahyangnb/generate_api_path
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
@@ -11,12 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   args: ^2.4.2
+  analyzer: ^6.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  analyzer: ^6.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
