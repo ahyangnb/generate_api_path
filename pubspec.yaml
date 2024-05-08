@@ -1,5 +1,5 @@
 name: generate_api_path
-description: "A new Flutter package project."
+description: "A plugin can be generated different api path file for encode api request."
 version: 0.0.1
 homepage: https://github.com/ahyangnb/generate_api_path
 
