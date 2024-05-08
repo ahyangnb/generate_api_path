@@ -98,6 +98,9 @@ import 'package:flutter/foundation.dart';
     final resultContent = buffer.toString();
 
     File file = File(targetFilePath);
+    if (!file.existsSync()) {
+      file.createSync(recursive: true);
+    }
     file.writeAsStringSync(resultContent);
   }
 }

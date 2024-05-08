@@ -1,39 +1,56 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Generate api path.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+a plugin can be generated different api path file.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+import the `generate_api_path` and `analyzer` plugin in `pubspec.yaml` file.
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  # This one.
+  generate_api_path: ^0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # This one.
+  analyzer: ^6.2.0
 ```
 
-## Additional information
+make a file `origin.txt` on `material` directory, and write the api path in it.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+the key is code and the value is the path.
+
+```txt
+00000000-00000000-00000-000000000000 -> /user/info
+00000000-00000000-00000-000000000001 -> /system/hi/notice
+00000000-00000000-00000-000000000002 -> /flower/hi/good
+```
+
+then run the command:
+
+```shell
+dart run generate_api_path:create --origin_file_path material/origin.txt --target_file_path lib/gen/http/api_mapping_generate.dart --mode debug
+```
+
+or
+
+```shell
+dart run generate_api_path:create --origin_file_path material/origin.txt --target_file_path lib/gen/api_mapping_generate.dart --mode release
+```
+
+it will generate a file `api_mapping_generate.dart` in `lib/gen` directory and the content is:
+
+```dart
+class UrlGenerator {
+  static const String userInfo = '/user/info';
+  static const String systemHiNotice = '/system/hi/notice';
+  static const String flowerHiGood = '/flower/hi/good';
+}
+```
+
+more detail see the [example](example) directory.
