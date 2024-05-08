@@ -1,6 +1,6 @@
 # Generate api path.
 
-A plugin can be generated different api path file for encode api request.
+The generate_api_path can be generated different api path file for encode api request.
 
 ## Generate result.
 
