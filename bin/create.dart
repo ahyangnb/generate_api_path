@@ -1,7 +1,6 @@
 import 'package:args/args.dart';
+import 'package:generate_api_path/generate_api_path.dart';
 
-// dart run generate_api_path:create --origin_file_path material/pairuplater.xyz.txt --target_file_path lib/gen/http/api_mapping_ok.dart --mode debug
-// dart run generate_api_path:create --origin_file_path material/pairuplater.xyz.txt --target_file_path lib/gen/http/api_mapping_ok.dart --mode release
 void main(List<String> args) {
   final parser = ArgParser();
 
@@ -24,10 +23,22 @@ void main(List<String> args) {
   if (parsedArgs['mode'] == null) {
     throw Exception('mode is required');
   }
+  if (parsedArgs['mode'] != "debug" && parsedArgs['mode'] != "release") {
+    throw Exception('mode param is error');
+  }
+  final originFilePath = parsedArgs['origin_file_path'];
+  final targetFilePath = parsedArgs['target_file_path'];
+  final mode = parsedArgs['mode'];
 
   print(
-    "origin_file_path: ${parsedArgs['origin_file_path']}\n"
-    "target_file_path: ${parsedArgs['target_file_path']}\n"
+    "originFilePath: $originFilePath\n"
+    "target_file_path: $targetFilePath\n"
     "mode: ${parsedArgs['mode']}\n",
+  );
+
+  GenerateApiPath.run(
+    originFilePath: originFilePath,
+    targetFilePath: targetFilePath,
+    mode: mode,
   );
 }
