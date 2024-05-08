@@ -2,6 +2,26 @@
 
 a plugin can be generated different api path file.
 
+## Generate result.
+
+```dart
+class UrlGenerator {
+  static const String userInfo = '/user/info';
+  static const String systemHiNotice = '/system/hi/notice';
+  static const String flowerHiGood = '/flower/hi/good';
+}
+```
+
+or
+
+```dart
+class UrlGenerator {
+  static const String userInfo = '00000000-00000000-00000-000000000000';
+  static const String systemHiNotice = '00000000-00000000-00000-000000000001';
+  static const String flowerHiGood = '00000000-00000000-00000-000000000002';
+}
+```
+
 ## Usage
 
 import the `generate_api_path` and `analyzer` plugin in `pubspec.yaml` file.
@@ -40,7 +60,7 @@ dart run generate_api_path:create --origin_file_path material/origin.txt --targe
 or
 
 ```shell
-dart run generate_api_path:create --origin_file_path material/origin.txt --target_file_path lib/gen/api_mapping_generate.dart --mode release
+dart run generate_api_path:create --origin_file_path material/origin.txt --target_file_path lib/gen/http/api_mapping_generate.dart --mode release
 ```
 
 it will generate a file `api_mapping_generate.dart` in `lib/gen` directory and the content is:
@@ -50,6 +70,16 @@ class UrlGenerator {
   static const String userInfo = '/user/info';
   static const String systemHiNotice = '/system/hi/notice';
   static const String flowerHiGood = '/flower/hi/good';
+}
+```
+
+or
+
+```dart
+class UrlGenerator {
+  static const String userInfo = '00000000-00000000-00000-000000000000';
+  static const String systemHiNotice = '00000000-00000000-00000-000000000001';
+  static const String flowerHiGood = '00000000-00000000-00000-000000000002';
 }
 ```
 
