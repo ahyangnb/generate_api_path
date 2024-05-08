@@ -4,6 +4,8 @@ a plugin can be generated different api path file.
 
 ## Generate result.
 
+debug mode:
+
 ```dart
 class UrlGenerator {
   static const String userInfo = '/user/info';
@@ -12,7 +14,7 @@ class UrlGenerator {
 }
 ```
 
-or
+release mode:
 
 ```dart
 class UrlGenerator {
