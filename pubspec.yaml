@@ -1,6 +1,6 @@
 name: generate_api_path
 description: "The generate_api_path can be generated different api path file for encode api request."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/ahyangnb/generate_api_path
 
 environment:
