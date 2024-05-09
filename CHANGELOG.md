@@ -1,3 +1,7 @@
+## 0.0.4
+
+* remove http from apiPath when generate.
+ 
 ## 0.0.3
 
 * generate apiPath.

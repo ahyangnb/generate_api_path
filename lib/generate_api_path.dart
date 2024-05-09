@@ -60,7 +60,7 @@ class GenerateApiPath {
 // **************************************************************************
 """);
     buffer.writeln("");
-    buffer.writeln('const String apiUrl = "http://$apiPath";');
+    buffer.writeln('const String apiUrl = "$apiPath";');
     buffer.writeln("");
     buffer.writeln('class UrlGenerator {');
     try {
