@@ -12,6 +12,7 @@ class GenerateApiPath {
     required String originFilePath,
     required String targetFilePath,
     required String mode,
+    required String apiPath,
   }) async {
     final file = File(originFilePath);
     if (!file.existsSync()) {
@@ -39,14 +40,16 @@ class GenerateApiPath {
         var firstVariable = declaration.variables.variables.first;
         var value = firstVariable.initializer;
         handleFile(json.decode(value.toString()),
-            mode: mode, targetFilePath: targetFilePath);
+            mode: mode, targetFilePath: targetFilePath, apiPath: apiPath);
         break;
       }
     }
   }
 
   static void handleFile(Map<String, dynamic> mapValue,
-      {required String mode, required String targetFilePath}) {
+      {required String mode,
+      required String targetFilePath,
+      required String apiPath}) {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
 
@@ -56,6 +59,8 @@ class GenerateApiPath {
 // Q1 generate_api_path - UrlGenerator
 // **************************************************************************
 """);
+    buffer.writeln("");
+    buffer.writeln('const String apiUrl = "http://$apiPath";');
     buffer.writeln("");
     buffer.writeln('class UrlGenerator {');
     try {
@@ -82,7 +87,7 @@ class GenerateApiPath {
           final runInDebug = mode == "debug";
 
           buffer.writeln(
-              '  static const String $constantName = \'${runInDebug ? value : key}\';');
+              '  static const String $constantName = \'${runInDebug ? value : "/$key"}\';');
         },
       );
     } catch (e) {

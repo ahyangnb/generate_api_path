@@ -1,3 +1,7 @@
+## 0.0.3
+
+* generate apiPath.
+
 ## 0.0.2
 
 * remove import 'package:flutter/foundation.dart';
