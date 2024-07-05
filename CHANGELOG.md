@@ -1,4 +1,8 @@
-## 0.0.4
+## 0.0.5
+
+* add imPath.
+
+ ## 0.0.4
 
 * remove http from apiPath when generate.
  
