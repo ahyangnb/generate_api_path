@@ -8,6 +8,7 @@ void main(List<String> args) {
   parser.addOption('target_file_path');
   parser.addOption('apiPath');
   parser.addOption('imPath');
+  parser.addOption('logPath');
   parser.addOption('mode');
 
   final parsedArgs = parser.parse(args);
@@ -28,6 +29,9 @@ void main(List<String> args) {
   if (parsedArgs['imPath'] == null) {
     throw Exception('imPath is required');
   }
+  if (parsedArgs['logPath'] == null) {
+    throw Exception('logPath is required');
+  }
   if (parsedArgs['mode'] == null) {
     throw Exception('mode is required');
   }
@@ -38,6 +42,7 @@ void main(List<String> args) {
   final targetFilePath = parsedArgs['target_file_path'];
   final apiPath = parsedArgs['apiPath'];
   final imPath = parsedArgs['imPath'];
+  final logPath = parsedArgs['logPath'];
   final mode = parsedArgs['mode'];
 
   print(
@@ -45,6 +50,7 @@ void main(List<String> args) {
     "target_file_path: $targetFilePath\n"
     "apiPath: $apiPath\n"
     "imPath: $imPath\n"
+    "logPath: $logPath\n"
     "mode: ${parsedArgs['mode']}\n",
   );
 
@@ -54,5 +60,6 @@ void main(List<String> args) {
     mode: mode,
     apiPath: apiPath,
     imPath: imPath,
+    logPath: logPath,
   );
 }
