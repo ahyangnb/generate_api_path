@@ -1,3 +1,7 @@
+## 0.0.6
+
+* add logPath.
+
 ## 0.0.5
 
 * add imPath.
