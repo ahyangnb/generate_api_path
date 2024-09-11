@@ -1,5 +1,4 @@
 import 'package:args/args.dart';
-import 'package:generate_api_path/generate_api_path.dart';
 
 void main(List<String> args) {
   final parser = ArgParser();
@@ -23,7 +22,7 @@ void main(List<String> args) {
     throw Exception('mode param is error');
   }
   final logPath = parsedArgs['logPath'];
-  final mode = parsedArgs['mode'];
+  // final mode = parsedArgs['mode'];
 
   print(
     "logPath: $logPath\n"
