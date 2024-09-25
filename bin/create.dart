@@ -26,12 +26,6 @@ void main(List<String> args) {
   if (parsedArgs['apiPath'] == null) {
     throw Exception('apiPath is required');
   }
-  if (parsedArgs['imPath'] == null) {
-    throw Exception('imPath is required');
-  }
-  if (parsedArgs['logPath'] == null) {
-    throw Exception('logPath is required');
-  }
   if (parsedArgs['mode'] == null) {
     throw Exception('mode is required');
   }

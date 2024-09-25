@@ -13,12 +13,12 @@ class GenerateApiPath {
     required String targetFilePath,
     required String mode,
     required String apiPath,
-    required String imPath,
-    required String logPath,
+    required String? imPath,
+    required String? logPath,
   }) async {
     final file = File(originFilePath);
     if (!file.existsSync()) {
-      return;
+      throw Exception('the originFilePath File not found');
     }
     String fileContentString = file.readAsStringSync();
 
@@ -59,8 +59,8 @@ class GenerateApiPath {
     required String mode,
     required String targetFilePath,
     required String apiPath,
-    required String imPath,
-    required String logPath,
+    required String? imPath,
+    required String? logPath,
   }) {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
@@ -73,8 +73,12 @@ class GenerateApiPath {
 """);
     buffer.writeln("");
     buffer.writeln('const String apiUrl = \'$apiPath\';');
-    buffer.writeln('const String imPath = \'$imPath\';');
-    buffer.writeln('const String logPath = \'$logPath\';');
+    if (imPath != null) {
+      buffer.writeln('const String imPath = \'$imPath\';');
+    }
+    if (logPath != null) {
+      buffer.writeln('const String logPath = \'$logPath\';');
+    }
     buffer.writeln("");
     buffer.writeln('class UrlGenerator {');
     try {
