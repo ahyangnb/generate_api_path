@@ -2,6 +2,21 @@ import 'package:args/args.dart';
 import 'package:generate_api_path/generate_api_path.dart';
 
 void main(List<String> args) {
+  args = [
+    '--origin_file_path',
+    '/Users/zengyang/Documents/flutter_pro/Zeda/materials/zedapro.quest映射关系.txt',
+    '--apiPath',
+    'http://test-app.zedapro.quest',
+    '--target_file_path',
+    '/Users/zengyang/Documents/flutter_pro/Zeda/lib/gen/http/api_mapping_generate.dart',
+    '--mode',
+    'debug',
+    '--className',
+    'OkUrl',
+    '--skipIfContainsPostV2',
+    '1'
+  ];
+
   final parser = ArgParser();
 
   parser.addOption('origin_file_path');
@@ -10,6 +25,8 @@ void main(List<String> args) {
   parser.addOption('imPath');
   parser.addOption('logPath');
   parser.addOption('mode');
+  parser.addOption('className');
+  parser.addOption("skipIfContainsPostV2");
 
   final parsedArgs = parser.parse(args);
   print(
@@ -38,6 +55,9 @@ void main(List<String> args) {
   final imPath = parsedArgs['imPath'];
   final logPath = parsedArgs['logPath'];
   final mode = parsedArgs['mode'];
+  final className = parsedArgs['className'];
+  final bool skipIfContainsPostV2 =
+      int.parse("${parsedArgs['skipIfContainsPostV2'] ?? "0"}") == 1;
 
   print(
     "originFilePath: $originFilePath\n"
@@ -45,7 +65,9 @@ void main(List<String> args) {
     "apiPath: $apiPath\n"
     "imPath: $imPath\n"
     "logPath: $logPath\n"
-    "mode: ${parsedArgs['mode']}\n",
+    "mode: $mode\n"
+    "className: $className\n"
+    "skipIfContainsPostV2: $skipIfContainsPostV2\n",
   );
 
   GenerateApiPath.run(
@@ -55,5 +77,7 @@ void main(List<String> args) {
     apiPath: apiPath,
     imPath: imPath,
     logPath: logPath,
+    className: className,
+    skipIfContainsPostV2: skipIfContainsPostV2,
   );
 }

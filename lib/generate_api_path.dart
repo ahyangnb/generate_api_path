@@ -15,6 +15,8 @@ class GenerateApiPath {
     required String apiPath,
     required String? imPath,
     required String? logPath,
+    required String? className,
+    required bool skipIfContainsPostV2,
   }) async {
     final file = File(originFilePath);
     if (!file.existsSync()) {
@@ -22,7 +24,7 @@ class GenerateApiPath {
     }
     String fileContentString = file.readAsStringSync();
 
-    fileContentString = fileContentString.replaceAll('\n', '",\n\"');
+    fileContentString = fileContentString.replaceAll('\n', '",\n"');
     fileContentString = fileContentString.replaceAll(' -> ', '":"');
     fileContentString = "{\"$fileContentString\"}";
     fileContentString = fileContentString.replaceAll('""', "");
@@ -48,6 +50,8 @@ class GenerateApiPath {
           apiPath: apiPath,
           imPath: imPath,
           logPath: logPath,
+          className: className,
+          skipIfContainsPostV2: skipIfContainsPostV2,
         );
         break;
       }
@@ -61,6 +65,8 @@ class GenerateApiPath {
     required String apiPath,
     required String? imPath,
     required String? logPath,
+    required String? className,
+    required bool skipIfContainsPostV2,
   }) {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
@@ -80,7 +86,7 @@ class GenerateApiPath {
       buffer.writeln('const String logPath = \'$logPath\';');
     }
     buffer.writeln("");
-    buffer.writeln('class UrlGenerator {');
+    buffer.writeln('class ${className ?? "UrlGenerator"} {');
     try {
       mapValue.forEach(
         (key, value) {
@@ -104,8 +110,20 @@ class GenerateApiPath {
               constantName[0].toLowerCase() + constantName.substring(1);
           final runInDebug = mode == "debug";
 
-          buffer.writeln(
-              '  static const String $constantName = \'${runInDebug ? value : "/$key"}\';');
+          final resultValue = "'${runInDebug ? value : "/$key"}';";
+          if (skipIfContainsPostV2) {
+            final useToCheck =
+                '${resultValue.substring(1, resultValue.length - 2)}PostV2';
+            if (mapValue.containsValue(useToCheck)) {
+              print('mapValue contains $resultValue/PostV2, just jump');
+            } else {
+              buffer.writeln(
+                  '  static const String $constantName = $resultValue');
+            }
+          } else {
+            buffer
+                .writeln('  static const String $constantName = $resultValue');
+          }
         },
       );
     } catch (e) {
