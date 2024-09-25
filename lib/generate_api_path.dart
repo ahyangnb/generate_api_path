@@ -156,16 +156,20 @@ class GenerateApiPath {
   }) {
     if (removeStartWIth != null) {
       for (var element in removeStartWIth.split(",")) {
-        if (resultValue.substring(1).startsWith(element.trim())) {
-          return;
+        if (element.trim().isNotEmpty) {
+          if (resultValue.substring(1).startsWith(element.trim())) {
+            return;
+          }
         }
       }
     }
     if (removeEndWIth != null) {
       for (var element in removeEndWIth.split(",")) {
         final subs = resultValue.substring(0, resultValue.length - 2);
-        if (subs.endsWith(element.trim())) {
-          return;
+        if (element.trim().isNotEmpty) {
+          if (subs.endsWith(element.trim())) {
+            return;
+          }
         }
       }
     }
