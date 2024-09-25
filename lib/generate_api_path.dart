@@ -18,6 +18,7 @@ class GenerateApiPath {
     required String? className,
     required bool skipIfContainsPostV2,
     required String? removeStartWIth,
+    required String? removeEndWIth,
   }) async {
     final file = File(originFilePath);
     if (!file.existsSync()) {
@@ -54,6 +55,7 @@ class GenerateApiPath {
           className: className,
           skipIfContainsPostV2: skipIfContainsPostV2,
           removeStartWIth: removeStartWIth,
+          removeEndWIth: removeEndWIth,
         );
         break;
       }
@@ -70,6 +72,7 @@ class GenerateApiPath {
     required String? className,
     required bool skipIfContainsPostV2,
     required String? removeStartWIth,
+    required String? removeEndWIth,
   }) {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
@@ -121,11 +124,12 @@ class GenerateApiPath {
               print('mapValue contains $resultValue/PostV2, just jump');
             } else {
               writeToLine(constantName, resultValue, buffer,
-                  removeStartWIth: removeStartWIth);
+                  removeStartWIth: removeStartWIth,
+                  removeEndWIth: removeEndWIth);
             }
           } else {
             writeToLine(constantName, resultValue, buffer,
-                removeStartWIth: removeStartWIth);
+                removeStartWIth: removeStartWIth, removeEndWIth: removeEndWIth);
           }
         },
       );
@@ -144,11 +148,23 @@ class GenerateApiPath {
   }
 
   static void writeToLine(
-      String constantName, String resultValue, StringBuffer buffer,
-      {required String? removeStartWIth}) {
+    String constantName,
+    String resultValue,
+    StringBuffer buffer, {
+    required String? removeStartWIth,
+    required String? removeEndWIth,
+  }) {
     if (removeStartWIth != null) {
       for (var element in removeStartWIth.split(",")) {
         if (resultValue.substring(1).startsWith(element.trim())) {
+          return;
+        }
+      }
+    }
+    if (removeEndWIth != null) {
+      for (var element in removeEndWIth.split(",")) {
+        final subs = resultValue.substring(0, resultValue.length - 2);
+        if (subs.endsWith(element.trim())) {
           return;
         }
       }

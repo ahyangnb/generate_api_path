@@ -13,6 +13,7 @@ void main(List<String> args) {
   parser.addOption('className');
   parser.addOption("skipIfContainsPostV2");
   parser.addOption("removeStartWIth");
+  parser.addOption("removeEndWIth");
 
   final parsedArgs = parser.parse(args);
   print(
@@ -47,6 +48,7 @@ void main(List<String> args) {
 
   /// String, divided by ","
   final removeStartWIth = parsedArgs['removeStartWIth'];
+  final removeEndWIth = parsedArgs['removeEndWIth'];
 
   print(
     "originFilePath: $originFilePath\n"
@@ -57,7 +59,8 @@ void main(List<String> args) {
     "mode: $mode\n"
     "className: $className\n"
     "skipIfContainsPostV2: $skipIfContainsPostV2\n"
-    "removeStartWIth: $removeStartWIth\n",
+    "removeStartWIth: $removeStartWIth\n"
+    "removeEndWIth: $removeEndWIth\n",
   );
 
   GenerateApiPath.run(
@@ -70,5 +73,6 @@ void main(List<String> args) {
     className: className,
     skipIfContainsPostV2: skipIfContainsPostV2,
     removeStartWIth: removeStartWIth,
+    removeEndWIth: removeEndWIth,
   );
 }
