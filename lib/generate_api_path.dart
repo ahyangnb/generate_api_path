@@ -17,6 +17,7 @@ class GenerateApiPath {
     required String? logPath,
     required String? className,
     required bool skipIfContainsPostV2,
+    required String? removeStartWIth,
   }) async {
     final file = File(originFilePath);
     if (!file.existsSync()) {
@@ -52,6 +53,7 @@ class GenerateApiPath {
           logPath: logPath,
           className: className,
           skipIfContainsPostV2: skipIfContainsPostV2,
+          removeStartWIth: removeStartWIth,
         );
         break;
       }
@@ -67,6 +69,7 @@ class GenerateApiPath {
     required String? logPath,
     required String? className,
     required bool skipIfContainsPostV2,
+    required String? removeStartWIth,
   }) {
     final buffer = StringBuffer();
     buffer.writeln("// GENERATED CODE - DO NOT MODIFY BY HAND");
@@ -117,12 +120,12 @@ class GenerateApiPath {
             if (mapValue.containsValue(useToCheck)) {
               print('mapValue contains $resultValue/PostV2, just jump');
             } else {
-              buffer.writeln(
-                  '  static const String $constantName = $resultValue');
+              writeToLine(constantName, resultValue, buffer,
+                  removeStartWIth: removeStartWIth);
             }
           } else {
-            buffer
-                .writeln('  static const String $constantName = $resultValue');
+            writeToLine(constantName, resultValue, buffer,
+                removeStartWIth: removeStartWIth);
           }
         },
       );
@@ -138,5 +141,18 @@ class GenerateApiPath {
       file.createSync(recursive: true);
     }
     file.writeAsStringSync(resultContent);
+  }
+
+  static void writeToLine(
+      String constantName, String resultValue, StringBuffer buffer,
+      {required String? removeStartWIth}) {
+    if (removeStartWIth != null) {
+      for (var element in removeStartWIth.split(",")) {
+        if (resultValue.substring(1).startsWith(element.trim())) {
+          return;
+        }
+      }
+    }
+    buffer.writeln('  static const String $constantName = $resultValue');
   }
 }

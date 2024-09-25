@@ -14,7 +14,10 @@ void main(List<String> args) {
     '--className',
     'OkUrl',
     '--skipIfContainsPostV2',
-    '1'
+    '1',
+    '--removeStartWIth',
+    '/user/',
+    // '/user/, ',
   ];
 
   final parser = ArgParser();
@@ -27,6 +30,7 @@ void main(List<String> args) {
   parser.addOption('mode');
   parser.addOption('className');
   parser.addOption("skipIfContainsPostV2");
+  parser.addOption("removeStartWIth");
 
   final parsedArgs = parser.parse(args);
   print(
@@ -59,6 +63,9 @@ void main(List<String> args) {
   final bool skipIfContainsPostV2 =
       int.parse("${parsedArgs['skipIfContainsPostV2'] ?? "0"}") == 1;
 
+  /// String, divided by ","
+  final removeStartWIth = parsedArgs['removeStartWIth'];
+
   print(
     "originFilePath: $originFilePath\n"
     "target_file_path: $targetFilePath\n"
@@ -67,7 +74,8 @@ void main(List<String> args) {
     "logPath: $logPath\n"
     "mode: $mode\n"
     "className: $className\n"
-    "skipIfContainsPostV2: $skipIfContainsPostV2\n",
+    "skipIfContainsPostV2: $skipIfContainsPostV2\n"
+    "removeStartWIth: $removeStartWIth\n",
   );
 
   GenerateApiPath.run(
@@ -79,5 +87,6 @@ void main(List<String> args) {
     logPath: logPath,
     className: className,
     skipIfContainsPostV2: skipIfContainsPostV2,
+    removeStartWIth: removeStartWIth,
   );
 }
