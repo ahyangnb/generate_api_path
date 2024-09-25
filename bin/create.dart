@@ -2,24 +2,6 @@ import 'package:args/args.dart';
 import 'package:generate_api_path/generate_api_path.dart';
 
 void main(List<String> args) {
-  args = [
-    '--origin_file_path',
-    '/Users/zengyang/Documents/flutter_pro/Zeda/materials/zedapro.quest映射关系.txt',
-    '--apiPath',
-    'http://test-app.zedapro.quest',
-    '--target_file_path',
-    '/Users/zengyang/Documents/flutter_pro/Zeda/lib/gen/http/api_mapping_generate.dart',
-    '--mode',
-    'debug',
-    '--className',
-    'OkUrl',
-    '--skipIfContainsPostV2',
-    '1',
-    '--removeStartWIth',
-    '/user/',
-    // '/user/, ',
-  ];
-
   final parser = ArgParser();
 
   parser.addOption('origin_file_path');
